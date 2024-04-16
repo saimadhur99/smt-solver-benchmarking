@@ -27,18 +27,23 @@ def find_multiplicative_inverse(start, end):
             if ctx.check_context() == Status.SAT:
                 model = Model.from_context(ctx, keep_subst=True)
                 value = model.get_float_value(x)  # Use get_double_value for real numbers
-                print(f"Multiplicative inverse of {i} is {value}")
+                #print(f"Multiplicative inverse of {i} is {value}")
             else:
                 print(f"No solution for {i}")
         finally:
             ctx.dispose()
 
 total_start_time = time.time()
+
 for end in range(10, 1001, 50):
     start_time = time.time()
+    # Find multiplicative inverses for the current range
     find_multiplicative_inverse(1, end)
     end_time = time.time()
+    # Calculate and print the running time for the current range
     print(f"Running time for range 1 to {end}: {end_time - start_time:.2f} seconds")
+    # Print memory usage
     print(f"Memory usage for range 1 to {end}: {get_memory_usage()} bytes")
+
 total_end_time = time.time()
 print("Total running time:", total_end_time - total_start_time, "seconds")

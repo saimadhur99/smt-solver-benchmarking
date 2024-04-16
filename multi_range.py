@@ -13,8 +13,8 @@ def find_multiplicative_inverse(start, end):
     # Define a solver
     solver = Solver()
 
-    # Declare integer variable
-    x = Int('x')
+    # Declare real variable
+    x = Real('x')
 
     # Iterate over numbers in the specified range
     for i in range(start, end + 1):
@@ -27,9 +27,10 @@ def find_multiplicative_inverse(start, end):
             # Get the model
             model = solver.model()
             # Print multiplicative inverse
-            # print(f"Multiplicative inverse of {i} is {model[x].as_long()}")
+            inverse = model[x].as_decimal(10)
+            print(f"Approximate multiplicative inverse of {i} is {inverse}")
         else:
-            # print(f"No solution for {i}")
+            print(f"No approximate solution for {i}")
             pass
 
 # Start recording total running time

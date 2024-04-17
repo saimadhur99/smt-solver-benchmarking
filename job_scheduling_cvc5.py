@@ -122,11 +122,11 @@ for m in range(len(text_result)):
 print ("")
 print ("---------")
 # Calculate and print the total running time
-total_end_time = time.time()
-print("Total running time:", total_end_time - total_start_time, "seconds")
 
 for time_unit in range(len(text_result[0])):
     print ("t=%3d    :" % (time_unit), end=' ')
     for m in range(len(text_result)):
         print (text_result[m][time_unit], end=' ')
     print ("")
+total_end_time = time.time()
+print("Total running time:", total_end_time - total_start_time, "seconds")

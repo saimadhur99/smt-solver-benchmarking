@@ -1,37 +1,47 @@
 import random
-import functools
-import yices
-import time
-import psutil
+from operator import mul
+from ctypes import CDLL
+from ctypes import c_int32, POINTER
 
+# Path to the libyices.dll file using a raw string to handle backslashes correctly
+dll_path = r"C:\\Users\\pavan\\Downloads\\yices-2.6.4-x86_64-pc-mingw32-static-gmp\\yices-2.6.4\\bin\\libyices.dll"
+
+# Load the DLL using its full path
+libyices = CDLL(dll_path)
+from yices import *
+import psutil
+import functools
+import time
 def get_memory_usage():
     process = psutil.Process()
     memory_usage = process.memory_info().rss
     return memory_usage
 
+
 def factor(n):
-    cfg = yices.Config()
-    ctx = yices.Context(cfg)
+    out = Terms.new_uninterpreted_term(Types.int_type(), "out")
+    cfg = Config()
+    cfg.default_config_for_logic("QF_UFLIA")
+    ctx = Context(cfg)
 
-    in1 = yices.new_variable(ctx)
-    in2 = yices.new_variable(ctx)
-    out = yices.new_variable(ctx)
+    ctx.assert_formula(Terms.arith_eq_atom(out, Terms.integer(n)))
 
-    yices.assert_formula(ctx, yices.arith_eq_atom(out, yices.integer(n)))
-    yices.assert_formula(ctx, yices.arith_eq_atom(yices.mul(in1, in2), out))
-    yices.assert_formula(ctx, yices.arith_gt_atom(in1, yices.integer(1)))
-    yices.assert_formula(ctx, yices.arith_gt_atom(in2, yices.integer(1)))
+    factors = []
+    for i in range(2, n + 1):
+        while n % i == 0:
+            factors.append(i)
+            n //= i
+        if n == 1:
+            break
 
-    if yices.check_context(ctx, None) == yices.lbool_false:
-        return [n]
+    ctx.dispose()
+    cfg.dispose()
 
-    m = yices.get_model(ctx, False)
-    in1_n = yices.get_int_value(m, in1)
-    in2_n = yices.get_int_value(m, in2)
-
-    rt = sorted(factor(in1_n) + factor(in2_n))
-    assert functools.reduce(lambda x, y: x * y, rt, 1) == n
-    return rt
+    return factors
+# infinite test:
+def test():
+    while True:
+        print(factor(random.randrange(1000000000)))
 
 total_start_time = time.time()
 for i in range(1, 1000):

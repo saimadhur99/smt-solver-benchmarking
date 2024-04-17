@@ -1,5 +1,8 @@
+
+
 from cvc5.pythonic import *
 import itertools
+import time
 
 jobs=[]
 #"""
@@ -28,6 +31,8 @@ jobs.append([(9,  88),  (4,  54),  (6,  64),  (7,  32),  (0,  52),  (2,   6),  (
 machines=10
 makespan=842
 """
+total_start_time = time.time()
+
 
 # two intervals must not overlap with each other:
 def must_not_overlap (s, i1, i2):
@@ -116,6 +121,9 @@ for m in range(len(text_result)):
     print (m, end=' ')
 print ("")
 print ("---------")
+# Calculate and print the total running time
+total_end_time = time.time()
+print("Total running time:", total_end_time - total_start_time, "seconds")
 
 for time_unit in range(len(text_result[0])):
     print ("t=%3d    :" % (time_unit), end=' ')

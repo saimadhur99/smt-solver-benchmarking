@@ -1,5 +1,7 @@
 # smt-solver-benchmarking
 
+This repository contains files for Multiplicative Inverse, Prime Factorization, Job Scheduling and String Manipulation for three different SMT Solvers and measuring the solver against benchmarks like runtime and memory usage.
+
 To download and integrate the SMT solvers Yices, Z3, and CVC5 into a Python environment, you can follow these steps for each solver. Make sure you have Python installed on your system before you start.
 
 ### Step 1: Install Python (if not already installed)

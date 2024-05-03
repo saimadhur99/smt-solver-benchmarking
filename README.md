@@ -55,3 +55,7 @@ Yices does not have an official pip package, so it requires a few more steps to 
 After installation, verify that each solver is working correctly by querying their versions or running a simple problem. For Z3 and CVC5, you can use Python directly to create a simple test script. For Yices, you may test it via the command line or using system calls in Python as shown above.
 
 By following these steps, you should have Z3, CVC5, and Yices set up in your Python environment, ready for tackling various computational logic and verification tasks.
+
+### Step 6: Run the Python File
+
+Run the file: Type python <file_name>.py or python3 <file_name>.py (replacing filename.py with the name of the Python file, such as hello.py) and press Enter:

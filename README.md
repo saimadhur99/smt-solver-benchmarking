@@ -31,7 +31,7 @@ CVC5 can be installed using pip as well. Follow these steps:
 Yices does not have an official pip package, so it requires a few more steps to use with Python:
 
 1. **Download Yices:**
-   - Go to the [Yices download page](https://yices.csl.sri.com/download.shtml).
+   - Go to the official Yices download page.
    - Select the appropriate version for your operating system.
    - Follow the instructions to download and extract the files.
 
